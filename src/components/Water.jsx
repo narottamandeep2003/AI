@@ -34,21 +34,21 @@ export default function Water() {
         else if (s[SS - 1][0] !== s[SS][0] && s[SS - 1][1] !== s[SS][1]) {
             setSizebox1(s[SS][0] * one)
             setSizebox2(s[SS][1] * two)
-            svalues("transfer water")
+            svalues("Transfer water")
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
         }
         else if (s[SS - 1][0] !== s[SS][0]) {
             setSizebox1(s[SS][0] * one)
-            svalues("fill one jug " + s[SS][0])
+            svalues("Fill one jug " + s[SS][0])
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
         }
         else if (s[SS - 1][1] !== s[SS][1]) {
             setSizebox2(s[SS][1] * two)
-            svalues("fill second jug " + s[SS][1])
+            svalues("Fill second jug " + s[SS][1])
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
