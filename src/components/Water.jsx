@@ -9,6 +9,7 @@ import Box1 from './Box1'
 import Box2 from './Box2'
 export default function Water() {
     // const [perfSucks, degrade] = useState(false)
+    
     const perfSucks=false
     // const [SFE1, SetSFE1] = useState(false);
     // const [SFE2, SetSFE2] = useState(false);
@@ -16,8 +17,9 @@ export default function Water() {
     const [Sizebox1, setSizebox1] = useState(0);
     const [Sizebox2, setSizebox2] = useState(0);
     const [SS, SetS] = useState(0)
-
+    const win=window.innerWidth;
     // 
+    // console.log(win)
     const s = [[0, 0], [0, 3], [3, 0], [3, 3], [5, 1], [0, 1], [1, 0], [1, 3], [4, 0]]
 
     const handleClick = async() => {
@@ -65,7 +67,10 @@ export default function Water() {
                     dpr={[1, perfSucks ? 1.5 : 2]}
                     eventSource={document.getElementById('root')}
                     eventPrefix="client"
-                    camera={{ position: [20, 20, 20], fov: 40 }}>
+                    // camera={{ position: [20, 20, 20], fov: 40 }}>
+                    camera={{ position:(win<=750?[10, 15, 35]:[20, 20, 20]) , fov:(win<=750?20:40) }}
+                    
+                    >
                     <color attach="background" args={['#f0f0f0']} />
                     <Environment preset="city" blur={.8} resolution={256} />
                     {/* <ambientLight intensity={0.1} /> */}
@@ -111,11 +116,12 @@ export default function Water() {
 
 function Env({ perfSucks }) {
     const ref = useRef()
+    const win=window.innerWidth;
     useFrame((state, delta) => {
         // Animate the environment as well as the camera
         if (!perfSucks) {
             easing.damp3(ref.current.rotation, [Math.PI / 2, 0, state.clock.elapsedTime / 5 + state.pointer.x], 0.2, delta)
-            easing.damp3(state.camera.position, [Math.sin(state.pointer.x / 4) * 9, 1.25 + state.pointer.y, Math.cos(state.pointer.x / 4) * 9], 0.5, delta)
+           if(win>=750) {easing.damp3(state.camera.position, [Math.sin(state.pointer.x / 4) * 9, 1.25 + state.pointer.y, Math.cos(state.pointer.x / 4) * 9], 0.5, delta)}
             state.camera.lookAt(0, 1.2, 0)
         }
     })
