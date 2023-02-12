@@ -20,7 +20,7 @@ export default function Water() {
     // 
     const s = [[0, 0], [0, 3], [3, 0], [3, 3], [5, 1], [0, 1], [1, 0], [1, 3], [4, 0]]
 
-    const handleClick = () => {
+    const handleClick = async() => {
         const one = 19 / 5
         const two = 12.5 / 3
         if (SS === 0) {

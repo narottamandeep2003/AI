@@ -4,7 +4,7 @@ import { Cylinder } from '@react-three/drei'
 export default function Box1(props) {
 
   const Mesh = useRef(null)
-  useFrame(({ clock }) => {
+  useFrame(() => {
     // const a = clock.getElapsedTime();
     // if(Mesh.current.scale.y<19)
     //    {Mesh.current.scale.y +=0.1
@@ -12,16 +12,16 @@ export default function Box1(props) {
     // }
     
     if (Mesh.current.scale.y < props.nSize) {
-      if (Mesh.current.scale.y < props.nSize) {
+    
         Mesh.current.scale.y += 0.1
         Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
-      }
+      
     }
     else if (Mesh.current.scale.y > props.nSize) {
-      if (Mesh.current.scale.y > props.nSize) {
+      
         Mesh.current.scale.y -= 0.1
         Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
-      }
+      
     }
   });
   return (
