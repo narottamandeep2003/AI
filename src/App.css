@@ -41,3 +41,8 @@ font-family: Arial, Helvetica, sans-serif;
 margin: 50px;
 color: black;
 }
+
+.ss{
+  width: 100vw;
+  height: 100vh;
+}
