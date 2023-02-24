@@ -19,8 +19,8 @@ class space {
 
 let s = new space([0, 0], null);
 queue.push([0, 0])
-let size = [4, 9]
-let goal = [0, 6]
+let size = [7, 5]
+let goal = [0, 3]
 
 let generate = (obj) => {
     let currSize = obj.data.data
@@ -164,7 +164,6 @@ let bfs=()=>{
        let node= visitnode[0].data
        if(node.data[0]==goal[0] && node.data[1]==goal[1])
        {
-        console.log("dmdmd")
         return visitnode[0];
        }
        visitnode[0].child.forEach((childnode)=>{
@@ -177,9 +176,15 @@ let bfs=()=>{
 let result=bfs();
 let ans=[]
 
+if(result!=null)
+{
 while(result.root!=null){
     ans.push(result.data.data)
     result=result.root
 }
 ans.push(result.data.data)
 console.table(ans.reverse())
+}
+else{
+console.log("no solution")
+}
