@@ -2,14 +2,13 @@ import React, { useState, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows, Lightformer, AccumulativeShadows, RandomizedLight } from '@react-three/drei'
 import { Model1 } from './Temp'
-import twojug from './twoJug'
+
 import { easing } from 'maath'
 
 // import { animated,useSpring } from '@react-spring/three'
 // import { useControls } from 'leva'
 import Box1 from './Box1'
 import Box2 from './Box2'
-import { useEffect } from 'react'
 export default function Water() {
 
 
@@ -34,7 +33,7 @@ export default function Water() {
     const msg = new SpeechSynthesisUtterance()
 
     const perfSucks = false
-    const [values, svalues] = useState("")
+    // const [values, svalues] = useState("")
     const [Sizebox1, setSizebox1] = useState(0);
     const [Sizebox2, setSizebox2] = useState(0);
     const [SS, SetS] = useState(0)
@@ -50,11 +49,11 @@ export default function Water() {
         if (a === 1) {
             setSizeA(5)
             setSizeB(3)
-            postData('http://localhost:8000/', { A: a })
+            postData('https://aihost.onrender.com/', { A: a })
             .then((data) => {
 
                 console.log(data)
-                if(data.length!=0){                
+                if(data.length!==0){                
                 setstates(data);
                 msg.text = "Solution  exist " + s
                 window.speechSynthesis.speak(msg)
@@ -65,11 +64,11 @@ export default function Water() {
         if (a === 2) {
             setSizeA(8)
             setSizeB(5)
-            postData('http://localhost:8000/', { A: a })
+            postData('https://aihost.onrender.com/', { A: a })
             .then((data) => {
 
                 console.log(data)
-                if(data.length!=0){                
+                if(data.length!==0){                
                 setstates(data);
                 msg.text = "Solution  exist " + s
                 window.speechSynthesis.speak(msg)
@@ -80,11 +79,11 @@ export default function Water() {
         if (a === 3) {
             setSizeA(4)
             setSizeB(3)
-            postData('http://localhost:8000/', { A: a })
+            postData('https://aihost.onrender.com/', { A: a })
             .then((data) => {
 
                 console.log(data)
-                if(data.length!=0){                
+                if(data.length!==0){                
                 setstates(data);
                 msg.text = "Solution  exist " + s
                 window.speechSynthesis.speak(msg)
@@ -95,11 +94,11 @@ export default function Water() {
         if (a === 4) {
             setSizeA(9)
             setSizeB(4)
-            postData('http://localhost:8000/', { A: a })
+            postData('https://aihost.onrender.com/', { A: a })
             .then((data) => {
 
                 console.log(data)
-                if(data.length!=0){                
+                if(data.length!==0){                
                 setstates(data);
                 msg.text = "Solution  exist " + s
                 window.speechSynthesis.speak(msg)
@@ -125,7 +124,7 @@ export default function Water() {
             msg.text = "Both are empty"+s
             window.speechSynthesis.speak(msg)
 
-            svalues("Both are empty")
+            // svalues("Both are empty")
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
@@ -142,7 +141,7 @@ export default function Water() {
             setSizebox2(s[SS][1] * two)
             msg.text = "Transfer water"
             window.speechSynthesis.speak(msg)
-            svalues("Transfer water")
+            // svalues("Transfer water")
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
@@ -158,7 +157,7 @@ export default function Water() {
             setSizebox1(s[SS][0] * one)
             msg.text = "Fill one jug " + s[SS][0]
             window.speechSynthesis.speak(msg)
-            svalues("Fill one jug " + s[SS][0])
+            // svalues("Fill one jug " + s[SS][0])
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
@@ -174,7 +173,7 @@ export default function Water() {
             setSizebox2(s[SS][1] * two)
             msg.text = "Fill second jug " + s[SS][1]
             window.speechSynthesis.speak(msg)
-            svalues("Fill second jug " + s[SS][1])
+            // svalues("Fill second jug " + s[SS][1])
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
