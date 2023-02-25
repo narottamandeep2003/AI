@@ -1,30 +1,32 @@
+let twojug=(sizeInput,goalInput)=>{
 let queue = []
 class node {
     constructor(val) {
         this.data = val
 
     }
-
 }
+
+// 
 class space {
     constructor(data, val) {
         this.data = new node(data)
         this.root = val;
         this.child = []
     }
-    // addchild=(data)=>{
-    //  this.child.push(new space(data,this))
-    // }
+  
 }
 
 let s = new space([0, 0], null);
 queue.push([0, 0])
-let size = [7, 5]
-let goal = [0, 3]
+// let size = [3, 5]
+// let goal = [0, 4]
+let size=sizeInput
+let goal=goalInput
 
 let generate = (obj) => {
     let currSize = obj.data.data
-    if (currSize[0] == goal[0] && currSize[1] == goal[1]) {
+    if (currSize[0] === goal[0] && currSize[1] === goal[1]) {
         return
     }
 
@@ -34,7 +36,7 @@ let generate = (obj) => {
 
     let flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -43,7 +45,7 @@ let generate = (obj) => {
         obj.child.push(new space(childval, obj))
 
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
 
@@ -51,7 +53,7 @@ let generate = (obj) => {
     childval = [currSize[0], size[1]]
     flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -59,7 +61,7 @@ let generate = (obj) => {
         queue.push(childval)
         obj.child.push(new space(childval, obj))
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
 
@@ -77,7 +79,7 @@ let generate = (obj) => {
 
     flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -85,7 +87,7 @@ let generate = (obj) => {
         queue.push(childval)
         obj.child.push(new space(childval, obj))
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
 
@@ -101,7 +103,7 @@ let generate = (obj) => {
     }
     flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -109,7 +111,7 @@ let generate = (obj) => {
         queue.push(childval)
         obj.child.push(new space(childval, obj))
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
 
@@ -121,7 +123,7 @@ let generate = (obj) => {
 
     flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -129,7 +131,7 @@ let generate = (obj) => {
         queue.push(childval)
         obj.child.push(new space(childval, obj))
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
 
@@ -137,7 +139,7 @@ let generate = (obj) => {
     childval = [currSize[0], 0]
     flag = true;
     queue.forEach((o) => {
-        if (o[0] == childval[0] && o[1] == childval[1]) {
+        if (o[0] === childval[0] && o[1] === childval[1]) {
             flag = false
         }
     })
@@ -145,7 +147,7 @@ let generate = (obj) => {
         queue.push(childval)
         obj.child.push(new space(childval, obj))
     }
-    else if (childval[0] == goal[0] && childval[1] == goal[1]) {
+    else if (childval[0] === goal[0] && childval[1] === goal[1]) {
         obj.child.push(new space(childval, obj))
     }
     obj.child.forEach((i) => {
@@ -158,11 +160,11 @@ generate(s)
 let visitnode=[]
 visitnode.push(s);
 
-let bfs=()=>{
 
-    while(visitnode.length!=0){
+let bfs=()=>{
+    while(visitnode.length!==0){
        let node= visitnode[0].data
-       if(node.data[0]==goal[0] && node.data[1]==goal[1])
+       if(node.data[0]===goal[0] && node.data[1]===goal[1])
        {
         return visitnode[0];
        }
@@ -171,20 +173,24 @@ let bfs=()=>{
        })
        visitnode.shift()
     }
-
 }
 let result=bfs();
 let ans=[]
 
-if(result!=null)
+if(result!==null)
 {
-while(result.root!=null){
+while(result.root!==null){
     ans.push(result.data.data)
     result=result.root
 }
 ans.push(result.data.data)
-console.table(ans.reverse())
+// console.table(ans.reverse())
+
+return ans.reverse()
 }
 else{
 console.log("no solution")
+return []
 }
+}
+export default twojug;

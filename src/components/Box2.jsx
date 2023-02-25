@@ -3,17 +3,22 @@ import { Cylinder } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 export default function Box2(props) {
   const Mesh = useRef(null)
+  let inc=()=>{
+    Mesh.current.scale.y += 0.1
+    Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
+  }
+  let dec=()=>{
+    Mesh.current.scale.y -= 0.1
+    Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
+  }
   useFrame(() => {
 
     if (Mesh.current.scale.y < props.nSize) {
-    
-        Mesh.current.scale.y += 0.1
-        Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
+      inc()
       
     }
-    else if (Mesh.current.scale.y > props.nSize) {
-        Mesh.current.scale.y -= 0.1
-        Mesh.current.position.y = (Mesh.current.scale.y * .1) / 2
+     if (Mesh.current.scale.y > props.nSize) {
+       dec()
       
     }
   });
