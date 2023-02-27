@@ -9,26 +9,9 @@ import { easing } from 'maath'
 // import { useControls } from 'leva'
 import Box1 from './Box1'
 import Box2 from './Box2'
+import twojug from './twoJug'
 export default function Water() {
 
-
-
-    async function postData(url, data) {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        return response.json(); // parses JSON response into native JavaScript objects
-    }
 
     const msg = new SpeechSynthesisUtterance()
 
@@ -43,76 +26,25 @@ export default function Water() {
     const [SizeB, setSizeB] = useState(0);
     const [s, setstates] = useState([]);
 
-
-    let solve = (a) => {
-        console.log(a)
-        if (a === 1) {
-            setSizeA(5)
-            setSizeB(3)
-            postData('https://aihost.onrender.com/', { A: a })
-            .then((data) => {
-
-                console.log(data)
-                if(data.length!==0){                
-                setstates(data);
-                msg.text = "Solution  exist " + s
-                window.speechSynthesis.speak(msg)
-                setinput(0)
-                }
-            });
+    const [a,seta]=useState(0)
+    const [b,setb]=useState(0)
+    const [c,setc]=useState(0)
+    const handle=()=>{
+        let s=twojug([a,b],[c,0])
+        setSizeA(Number(a))
+        setSizeB(Number(b))
+        if(s.length!==0){
+        msg.text = "Solution  exist " + s
+        window.speechSynthesis.speak(msg)
+        setstates(s)
+        setinput(0)
         }
-        if (a === 2) {
-            setSizeA(8)
-            setSizeB(5)
-            postData('https://aihost.onrender.com/', { A: a })
-            .then((data) => {
-
-                console.log(data)
-                if(data.length!==0){                
-                setstates(data);
-                msg.text = "Solution  exist " + s
-                window.speechSynthesis.speak(msg)
-                setinput(0)
-                }
-            });
+        else{
+            msg.text = "Solution not  exist " 
+                     window.speechSynthesis.speak(msg)
         }
-        if (a === 3) {
-            setSizeA(4)
-            setSizeB(3)
-            postData('https://aihost.onrender.com/', { A: a })
-            .then((data) => {
-
-                console.log(data)
-                if(data.length!==0){                
-                setstates(data);
-                msg.text = "Solution  exist " + s
-                window.speechSynthesis.speak(msg)
-                setinput(0)
-                }
-            });
-        }
-        if (a === 4) {
-            setSizeA(9)
-            setSizeB(4)
-            postData('https://aihost.onrender.com/', { A: a })
-            .then((data) => {
-
-                console.log(data)
-                if(data.length!==0){                
-                setstates(data);
-                msg.text = "Solution  exist " + s
-                window.speechSynthesis.speak(msg)
-                setinput(0)
-                }
-            });
-        }
-       
-
-        // console.log(s)
     }
 
-
-    console.log(s)
 
     const handleClick = () => {
 
@@ -134,6 +66,9 @@ export default function Water() {
                 setinput(1)
                 SetS([])
                 SetS(0)
+                seta(0)
+                setb(0)
+                setc(0)
             }
         }
         else if (s[SS - 1][0] !== s[SS][0] && s[SS - 1][1] !== s[SS][1]) {
@@ -151,6 +86,9 @@ export default function Water() {
                 setinput(1)
                 SetS([])
                 SetS(0)
+                seta(0)
+                setb(0)
+                setc(0)
             }
         }
         else if (s[SS - 1][0] !== s[SS][0]) {
@@ -167,6 +105,9 @@ export default function Water() {
                 setinput(1)
                 SetS([])
                 SetS(0)
+                seta(0)
+                setb(0)
+                setc(0)
             }
         }
         else if (s[SS - 1][1] !== s[SS][1]) {
@@ -183,6 +124,9 @@ export default function Water() {
                 setinput(1)
                 SetS([])
                 SetS(0)
+                seta(0)
+                setb(0)
+                setc(0)
             }
         }
     }
@@ -192,29 +136,30 @@ export default function Water() {
 
 
         <div className='window'>
-            {
-                (input) ? (
-                    <div className="btnbox">
-                        <button className='btns' onClick={() => {
-                            solve(1)
-                        }}>Size [5,3] Goal 4 </button>
-                        <button className='btns' onClick={() => {
-                            solve(2)
-                        }}>Size [8,5] Goal 3</button>
-                        <button className='btns' onClick={() => {
-                            solve(3)
-                        }}>Size [4,3] Goal 2</button>
-                        <button className='btns' onClick={() => {
-                            solve(4)
-                        }}>Size [9,4] Goal 6</button>
-                    </div>
-
-                ) : (
-                    <div className="btnbox">
-                        <button className='btns' onClick={handleClick}>Next</button>
-                    </div>
-                )
-            }
+           {
+            (input)?(
+                <div className='inputBox'>
+                    <div className="innerBox">
+                <input type="number" name="a" id="a" value={a} onChange={(e)=>{
+                    seta(e.target.value)
+                }}/>
+                <input type="number" name="b" id="b"value={b}onChange={(e)=>{
+                    setb(e.target.value)
+                }}/>
+                <input type="number" name="c" id="c"value={c}
+                onChange={(e)=>{
+                    setc(e.target.value)
+                }}/>
+                </div>
+              <button className='btns' onClick={handle}>Solve</button>
+        
+            </div>
+            ):(
+                <div className='inputBox'>
+            <button className='btns' onClick={handleClick}>Next</button>
+            </div>
+            )
+           }
 
             <div className="con">
                 <Canvas shadows

@@ -25,9 +25,12 @@ border-radius: 10px;
 color: white;
 margin: 2px;
 margin-top: 25px;
+outline: none;
+border: none;
 
 }
 .btns:hover{
+  outline: 3px solid orange;
   color: orange;
 }
 .btnbox{
@@ -42,4 +45,78 @@ margin-top: 25px;
   height: auto;
   z-index: 5;
   justify-content: space-evenly;
+}
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  z-index: 100;
+}
+.innerBox{
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#a::-webkit-inner-spin-button, 
+#a::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+#b::-webkit-inner-spin-button, 
+#b::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+#c::-webkit-inner-spin-button, 
+#c::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+#a,#b,#c{
+  margin: 0px 5px;
+  padding: 2px 5px;
+  outline: none;
+  background-color: black;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+}
+#a:focus,#b:focus,#c:focus{
+  outline: 3px solid orange;
+}
+
+@media only screen and (max-width: 750px) {
+  .innerBox{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin: 10px 0px; */
+  }
+  #a,#b,#c{
+    margin: 5px 0px;
+    padding: 2px 5px;
+    outline: none;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+  }
+  .btns{
+    font-size: .9rem;
+    
+    }
 }
