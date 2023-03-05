@@ -26,22 +26,22 @@ export default function Water() {
     const [SizeB, setSizeB] = useState(0);
     const [s, setstates] = useState([]);
 
-    const [a,seta]=useState(0)
-    const [b,setb]=useState(0)
-    const [c,setc]=useState(0)
-    const handle=()=>{
-        let s=twojug([a,b],[c,0])
+    const [a, seta] = useState(0)
+    const [b, setb] = useState(0)
+    const [c, setc] = useState(0)
+    const handle = () => {
+        let s = twojug([a, b], [c, 0])
         setSizeA(Number(a))
         setSizeB(Number(b))
-        if(s.length!==0){
-        msg.text = "Solution  exist " + s
-        window.speechSynthesis.speak(msg)
-        setstates(s)
-        setinput(0)
+        if (s.length !== 0) {
+            msg.text = "Solution  exist "
+            window.speechSynthesis.speak(msg)
+            setstates(s)
+            setinput(0)
         }
-        else{
-            msg.text = "Solution not  exist " 
-                     window.speechSynthesis.speak(msg)
+        else {
+            msg.text = "Solution not  exist "
+            window.speechSynthesis.speak(msg)
         }
     }
 
@@ -53,7 +53,7 @@ export default function Water() {
         if (SS === 0) {
             setSizebox1(0)
             setSizebox2(0)
-            msg.text = "Both are empty"+s
+            msg.text = "Empty both jug"
             window.speechSynthesis.speak(msg)
 
             // svalues("Both are empty")
@@ -61,7 +61,7 @@ export default function Water() {
                 SetS(SS + 1)
             }
             else {
-                // msg.text = "solution " + s[SS][0]
+                msg.text = "solution " + s[SS][0]
                 window.speechSynthesis.speak(msg)
                 setinput(1)
                 SetS([])
@@ -74,8 +74,15 @@ export default function Water() {
         else if (s[SS - 1][0] !== s[SS][0] && s[SS - 1][1] !== s[SS][1]) {
             setSizebox1(s[SS][0] * one)
             setSizebox2(s[SS][1] * two)
-            msg.text = "Transfer water"
-            window.speechSynthesis.speak(msg)
+
+            if (s[SS - 1][0] >= s[SS][0]) {
+                msg.text = "Transfer water 1 to 2"
+                window.speechSynthesis.speak(msg)
+            }
+            else {
+                msg.text = "Transfer water 2 to 1"
+                window.speechSynthesis.speak(msg)
+            }
             // svalues("Transfer water")
             if (s.length > SS + 1) {
                 SetS(SS + 1)
@@ -93,11 +100,17 @@ export default function Water() {
         }
         else if (s[SS - 1][0] !== s[SS][0]) {
             setSizebox1(s[SS][0] * one)
-            msg.text = "Fill one jug " + s[SS][0]
-            window.speechSynthesis.speak(msg)
-            // svalues("Fill one jug " + s[SS][0])
+            if (s[SS][0] === 0) {
+                msg.text = "Empty one jug "
+                window.speechSynthesis.speak(msg)
+            }
+            else {
+                msg.text = "Fill one jug "
+                window.speechSynthesis.speak(msg)
+            }
             if (s.length > SS + 1) {
                 SetS(SS + 1)
+
             }
             else {
                 msg.text = "solution " + s[SS][0]
@@ -112,9 +125,14 @@ export default function Water() {
         }
         else if (s[SS - 1][1] !== s[SS][1]) {
             setSizebox2(s[SS][1] * two)
-            msg.text = "Fill second jug " + s[SS][1]
-            window.speechSynthesis.speak(msg)
-            // svalues("Fill second jug " + s[SS][1])
+            if (s[SS][1] === 0) {
+                msg.text = "Empty second jug "
+                window.speechSynthesis.speak(msg)
+            }
+            else {
+                msg.text = "Fill second jug "
+                window.speechSynthesis.speak(msg)
+            }
             if (s.length > SS + 1) {
                 SetS(SS + 1)
             }
@@ -131,35 +149,34 @@ export default function Water() {
         }
     }
 
-
     return (
 
 
         <div className='window'>
-           {
-            (input)?(
-                <div className='inputBox'>
-                    <div className="innerBox">
-                <input type="number" name="a" id="a" value={a} onChange={(e)=>{
-                    seta(e.target.value)
-                }}/>
-                <input type="number" name="b" id="b"value={b}onChange={(e)=>{
-                    setb(e.target.value)
-                }}/>
-                <input type="number" name="c" id="c"value={c}
-                onChange={(e)=>{
-                    setc(e.target.value)
-                }}/>
-                </div>
-              <button className='btns' onClick={handle}>Solve</button>
-        
-            </div>
-            ):(
-                <div className='inputBox'>
-            <button className='btns' onClick={handleClick}>Next</button>
-            </div>
-            )
-           }
+            {
+                (input) ? (
+                    <div className='inputBox'>
+                        <div className="innerBox">
+                            <input type="number" name="a" id="a" value={a} onChange={(e) => {
+                                seta(e.target.value)
+                            }} />
+                            <input type="number" name="b" id="b" value={b} onChange={(e) => {
+                                setb(e.target.value)
+                            }} />
+                            <input type="number" name="c" id="c" value={c}
+                                onChange={(e) => {
+                                    setc(e.target.value)
+                                }} />
+                        </div>
+                        <button className='btns' onClick={handle}>Solve</button>
+
+                    </div>
+                ) : (
+                    <div className='inputBox'>
+                        <button className='btns' onClick={handleClick}>Next</button>
+                    </div>
+                )
+            }
 
             <div className="con">
                 <Canvas shadows
@@ -194,7 +211,7 @@ export default function Water() {
                     </AccumulativeShadows>
                     <ContactShadows opacity={.3} scale={10} blur={1} far={10} resolution={256} color="#000000" />
                     <Env perfSucks={perfSucks} />
-                    <OrbitControls />
+                    <OrbitControls  />
 
                 </Canvas>
             </div>
