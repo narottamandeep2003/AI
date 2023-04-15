@@ -25,7 +25,8 @@ export default function Water() {
     const [SizeA, setSizeA] = useState(0);
     const [SizeB, setSizeB] = useState(0);
     const [s, setstates] = useState([]);
-
+    const [Size1, setSize1] = useState(0);
+    const [Size2, setSize2] = useState(0);
     const [a, seta] = useState(0)
     const [b, setb] = useState(0)
     const [c, setc] = useState(0)
@@ -53,6 +54,8 @@ export default function Water() {
         if (SS === 0) {
             setSizebox1(0)
             setSizebox2(0)
+            setSize1(0)
+            setSize2(0)
             msg.text = "Empty both jug"
             window.speechSynthesis.speak(msg)
 
@@ -74,6 +77,8 @@ export default function Water() {
         else if (s[SS - 1][0] !== s[SS][0] && s[SS - 1][1] !== s[SS][1]) {
             setSizebox1(s[SS][0] * one)
             setSizebox2(s[SS][1] * two)
+            setSize1(s[SS][0])
+            setSize2(s[SS][1])
 
             if (s[SS - 1][0] >= s[SS][0]) {
                 msg.text = "Transfer water 1 to 2"
@@ -99,6 +104,8 @@ export default function Water() {
             }
         }
         else if (s[SS - 1][0] !== s[SS][0]) {
+            setSize1(s[SS][0])
+            setSize2(s[SS][1])
             setSizebox1(s[SS][0] * one)
             if (s[SS][0] === 0) {
                 msg.text = "Empty one jug "
@@ -124,6 +131,8 @@ export default function Water() {
             }
         }
         else if (s[SS - 1][1] !== s[SS][1]) {
+            setSize1(s[SS][0])
+            setSize2(s[SS][1])
             setSizebox2(s[SS][1] * two)
             if (s[SS][1] === 0) {
                 msg.text = "Empty second jug "
@@ -173,6 +182,7 @@ export default function Water() {
                     </div>
                 ) : (
                     <div className='inputBox'>
+                        <button className='btns'>{`A : ${Size1}  B: ${Size2}`}</button>
                         <button className='btns' onClick={handleClick}>Next</button>
                     </div>
                 )
